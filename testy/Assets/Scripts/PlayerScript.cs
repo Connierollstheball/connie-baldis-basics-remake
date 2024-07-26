@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour
     public Camera camera;
     float multiplier;
     public float sprint = 100f;
+    public float guiltval = 0f;
+    public bool lockedinguilt = false;
 
     void Update()
     {
@@ -37,7 +39,6 @@ public class PlayerScript : MonoBehaviour
         //------------------------------------------------------------------------
 
         //Spring & Move Logic ----------------------------------------------------
-        //TODO: Don't make Stamina deplete when the player isn't moving.
         if (Input.GetKey(KeyCode.LeftShift))
         {
             if (sprint >= 1f)
@@ -112,6 +113,13 @@ public class PlayerScript : MonoBehaviour
             other.GetComponent<swingdoorscript>().somethinginside = true;
         }
         //-------------------------------------------------------------------
+
+        // Entering Faculty Rooms -------------------------------------------
+        if (other.tag == "FacultyTrigger")
+        {
+            guiltval = 1f;
+        }
+        //-------------------------------------------------------------------
     }
 
     private void OnTriggerExit(Collider other)
@@ -120,6 +128,13 @@ public class PlayerScript : MonoBehaviour
         if (other.tag == "SwingDoor")
         {
             other.GetComponent<swingdoorscript>().somethinginside = false;
+        }
+        //-------------------------------------------------------------------
+
+        // Exiting Faculty Rooms -------------------------------------------
+        if (other.tag == "FacultyTrigger" && lockedinguilt == false)
+        {
+            guiltval = 0f;
         }
         //-------------------------------------------------------------------
     }

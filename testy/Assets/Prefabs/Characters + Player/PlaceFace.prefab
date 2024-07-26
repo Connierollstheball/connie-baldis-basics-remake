@@ -111,7 +111,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6164420654843992517}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.54
+  m_Radius: 0.54
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -120,7 +120,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 3
+  m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -137,7 +137,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agent: {fileID: 6164420654843992638}
-  Player: {fileID: 0}
+  Player: {fileID: 5927821490713564854, guid: ce7563b09bbea524d8cd930a57271e8f, type: 3}
+  Enemy: {fileID: 6164420654843992517}
 --- !u!136 &6164420654843992639
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -148,8 +149,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.13
-  m_Height: 2.85
+  m_Radius: 0.75
+  m_Height: 1.85
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &6164420654843992636

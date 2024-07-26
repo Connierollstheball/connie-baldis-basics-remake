@@ -20,6 +20,10 @@ public class bluedoorscript : MonoBehaviour
 
         DoorOne.GetComponent<Collider>().enabled = false;
         DoorTwo.GetComponent<Collider>().enabled = false;
+
+        DoorOne.layer = 2;
+        DoorTwo.layer = 2;
+
         AudioSource.PlayOneShot(AudioOpen);
         Invoke("close", 2.0f);
     }
@@ -32,6 +36,10 @@ public class bluedoorscript : MonoBehaviour
 
         DoorOne.GetComponent<Collider>().enabled = true;
         DoorTwo.GetComponent<Collider>().enabled = true;
+
+        DoorOne.layer = 0;
+        DoorTwo.layer = 0;
+
         AudioSource.PlayOneShot(AudioClose);  
     }
 }
