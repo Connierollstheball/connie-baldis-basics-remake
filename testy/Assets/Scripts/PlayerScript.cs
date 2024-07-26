@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class PlayerScript : MonoBehaviour
     public float sprint = 100f;
     public float guiltval = 0f;
     public bool lockedinguilt = false;
+    public int item1 = 0;
+    public int item2 = 0;
+    public int item3 = 0;
+    public int selecteditem = 0;
+    public GameObject item1slot;
+    public GameObject item2slot;
+    public GameObject item3slot;
+    public Sprite YellowDoorLockSprite;
 
     void Update()
     {
@@ -89,20 +98,179 @@ public class PlayerScript : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 // Locking Swing Doors - to be the Lock Item
-                if (hit.collider.tag == "SwingDoor" && hit.distance < 7.0f && hit.collider.gameObject.GetComponent<swingdoorscript>().lockedDoor == false)
+                if (hit.collider.tag == "SwingDoor" && hit.distance < 8.0f && hit.collider.gameObject.GetComponent<swingdoorscript>().lockedDoor == false && checkifItem(1))
                 {
                     hit.collider.gameObject.GetComponent<swingdoorscript>().lockDoor();
+                    removeItem(selecteditem);
                 }
 
                 // Blue Doors
-                if (hit.collider.tag == "BlueDoor" && hit.distance < 7.0f)
+                if (hit.collider.tag == "BlueDoor" && hit.distance < 8.0f)
                 {
                     hit.collider.gameObject.transform.parent.gameObject.GetComponent<bluedoorscript>().open();
+                }
+
+                //Detect Item Collection
+                if (hit.collider.tag == "ItemTag" && hit.distance < 8.0f)
+                {
+                    CheckInventoryPutObject(hit.collider.gameObject);
                 }
             }
         }
         //-------------------------------------------------------------------
+
+        // Inventory Selection ----------------------------------------------------
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            selecteditem = 0;
+        }
+
+        if (Input.GetKey(KeyCode.Alpha2))
+        {
+            selecteditem = 1;
+        }
+
+        if (Input.GetKey(KeyCode.Alpha3))
+        {
+            selecteditem = 2;
+        }
+        //------------------------------------------------------------------------
+
+        // UI Item Slot Updating -------------------------------------------------
+        // TODO: Find a better way to do this? All of the Item Stuff?
+        switch (item1)
+        {
+            case 0:
+            item1slot.GetComponent<Image>().sprite = null;
+            break;
+            case 1:
+            item1slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
+            break;
+        }
+
+        switch (item2)
+        {
+            case 0:
+            item2slot.GetComponent<Image>().sprite = null;
+            break;
+            case 1:
+            item2slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
+            break;
+        }
+
+        switch (item3)
+        {
+            case 0:
+            item3slot.GetComponent<Image>().sprite = null;
+            break;
+            case 1:
+            item3slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
+            break;
+        }
+
+        switch (selecteditem)
+        {
+            case 0:
+            item1slot.GetComponent<Image>().color = Color.red;
+            item2slot.GetComponent<Image>().color = Color.white;
+            item3slot.GetComponent<Image>().color = Color.white;
+            break;
+
+            case 1:
+            item1slot.GetComponent<Image>().color = Color.white;
+            item2slot.GetComponent<Image>().color = Color.red;
+            item3slot.GetComponent<Image>().color = Color.white;
+            break;
+
+            case 2:
+            item1slot.GetComponent<Image>().color = Color.white;
+            item2slot.GetComponent<Image>().color = Color.white;
+            item3slot.GetComponent<Image>().color = Color.red;
+            break;
+        }
+        //------------------------------------------------------------------------
     }
+
+    // Called when an Item is used -----------------------------------------------
+    void removeItem(int i)
+    {
+        if (i == 0)
+        {
+            item1 = 0;
+        }
+        else if (i == 1)
+        {
+            item2 = 0;
+        }
+        else if (i == 2)
+        {
+            item3 = 0;
+        }
+    }
+    //------------------------------------------------------------------------
+
+    // Item checking protocol ---------------------------------------------------
+    bool checkifItem(int i)
+    {
+        if (selecteditem == 0 && item1 == i)
+        {
+            return true;
+        }
+        else if (selecteditem == 1 && item2 == i)
+        {
+            return true;
+        }
+        else if (selecteditem == 2 && item3 == i)
+        {
+            return true;
+        }
+
+        return false;
+    }
+    //------------------------------------------------------------------------
+
+    // Protocol to put Items in someone's inventory --------------------------
+    void CheckInventoryPutObject(GameObject item)
+    {
+        bool foundspot = false;
+
+        if (item1 == 0)
+        {
+            item1 = item.GetComponent<ItemScript>().idofpickup;
+            foundspot = true;
+        }
+
+        if (item2 == 0 && foundspot != true)
+        {
+            item2 = item.GetComponent<ItemScript>().idofpickup;
+            foundspot = true;
+        }
+
+        if (item3 == 0 && foundspot != true)
+        {
+            item2 = item.GetComponent<ItemScript>().idofpickup;
+            foundspot = true;
+        }
+
+        if (foundspot != true)
+        {
+            if (selecteditem == 0)
+            {
+                item1 = item.GetComponent<ItemScript>().idofpickup;
+            }
+            else if (selecteditem == 1)
+            {
+                item2 = item.GetComponent<ItemScript>().idofpickup;
+            }
+            else if (selecteditem == 2)
+            {
+                item3 = item.GetComponent<ItemScript>().idofpickup;
+            }
+        }
+
+        Destroy(item);
+    }
+    //------------------------------------------------------------------------
 
     private void OnTriggerEnter(Collider other)
     {
