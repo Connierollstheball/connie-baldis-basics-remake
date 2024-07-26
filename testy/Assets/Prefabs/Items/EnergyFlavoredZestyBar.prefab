@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8424372221990059559
+--- !u!1 &7821263308776325913
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8424372221990059578}
-  - component: {fileID: 8424372221990059557}
-  - component: {fileID: 8424372221990059556}
-  - component: {fileID: 8424372221990059579}
-  - component: {fileID: 8992917555789064040}
+  - component: {fileID: 7821263308776325908}
+  - component: {fileID: 7821263308776325915}
+  - component: {fileID: 7821263308776325914}
+  - component: {fileID: 7821263308776325909}
+  - component: {fileID: 7821263308776325910}
   m_Layer: 0
-  m_Name: YellowDoorLock
+  m_Name: EnergyFlavoredZestyBar
   m_TagString: ItemTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8424372221990059578
+--- !u!4 &7821263308776325908
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424372221990059559}
+  m_GameObject: {fileID: 7821263308776325913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 68, y: 5.24, z: -7}
+  m_LocalPosition: {x: 69.51, y: 5, z: -33}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8424372221990059557
+--- !u!212 &7821263308776325915
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424372221990059559}
+  m_GameObject: {fileID: 7821263308776325913}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cd85652cfaf7b6849a2e74a01903d04a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9bf9c460675df964b97e8066ddaeb859, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -84,13 +84,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8424372221990059556
+--- !u!114 &7821263308776325914
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424372221990059559}
+  m_GameObject: {fileID: 7821263308776325913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eddc26e62b0334849ac2b04983058838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idofpickup: 2
+  item: {fileID: 7821263308776325913}
+--- !u!136 &7821263308776325909
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7821263308776325913}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.32
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7821263308776325910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7821263308776325913}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53ad3cfda16c1be4e9ba63c319333134, type: 3}
@@ -100,31 +128,3 @@ MonoBehaviour:
   lockX: 0
   lockY: 0
   lockZ: 0
---- !u!114 &8424372221990059579
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424372221990059559}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eddc26e62b0334849ac2b04983058838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  idofpickup: 1
-  item: {fileID: 8424372221990059559}
---- !u!136 &8992917555789064040
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8424372221990059559}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.32
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.0052081347, z: 0}

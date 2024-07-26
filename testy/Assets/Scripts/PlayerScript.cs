@@ -18,7 +18,12 @@ public class PlayerScript : MonoBehaviour
     public GameObject item1slot;
     public GameObject item2slot;
     public GameObject item3slot;
+    public GameObject item1slotbackg;
+    public GameObject item2slotbackg;
+    public GameObject item3slotbackg;
     public Sprite YellowDoorLockSprite;
+    public Sprite ZestySprite;
+    public Text ItemText;
 
     void Update()
     {
@@ -97,13 +102,6 @@ public class PlayerScript : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
-                // Locking Swing Doors - to be the Lock Item
-                if (hit.collider.tag == "SwingDoor" && hit.distance < 8.0f && hit.collider.gameObject.GetComponent<swingdoorscript>().lockedDoor == false && checkifItem(1))
-                {
-                    hit.collider.gameObject.GetComponent<swingdoorscript>().lockDoor();
-                    removeItem(selecteditem);
-                }
-
                 // Blue Doors
                 if (hit.collider.tag == "BlueDoor" && hit.distance < 8.0f)
                 {
@@ -118,6 +116,30 @@ public class PlayerScript : MonoBehaviour
             }
         }
         //-------------------------------------------------------------------
+
+        // Item Uses --------------------------------------------------------------
+        if (Input.GetMouseButtonDown(1))
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                // Yellow Door Lock
+                if (hit.collider.tag == "SwingDoor" && hit.distance < 8.0f && hit.collider.gameObject.GetComponent<swingdoorscript>().lockedDoor == false && checkifItem(1))
+                {
+                    hit.collider.gameObject.GetComponent<swingdoorscript>().lockDoor();
+                    removeItem(selecteditem);
+                }
+            }
+
+            // Energy Flavored Zesty Bar
+            if (checkifItem(2))
+            {
+                sprint = 150f;
+                removeItem(selecteditem);
+            }
+        }
 
         // Inventory Selection ----------------------------------------------------
         if (Input.GetKey(KeyCode.Alpha1))
@@ -141,55 +163,88 @@ public class PlayerScript : MonoBehaviour
         switch (item1)
         {
             case 0:
-            item1slot.GetComponent<Image>().sprite = null;
+            item1slot.SetActive(false);
             break;
             case 1:
+            item1slot.SetActive(true);
             item1slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
+            break;
+            case 2:
+            item1slot.SetActive(true);
+            item1slot.GetComponent<Image>().sprite = ZestySprite;
             break;
         }
 
         switch (item2)
         {
             case 0:
-            item2slot.GetComponent<Image>().sprite = null;
+            item2slot.SetActive(false);
             break;
             case 1:
+            item2slot.SetActive(true);
             item2slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
+            break;
+            case 2:
+            item2slot.SetActive(true);
+            item2slot.GetComponent<Image>().sprite = ZestySprite;
             break;
         }
 
         switch (item3)
         {
             case 0:
-            item3slot.GetComponent<Image>().sprite = null;
+            item3slot.SetActive(false);
             break;
             case 1:
+            item3slot.SetActive(true);
             item3slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
+            break;
+            case 2:
+            item3slot.SetActive(true);
+            item3slot.GetComponent<Image>().sprite = ZestySprite;
             break;
         }
 
         switch (selecteditem)
         {
             case 0:
-            item1slot.GetComponent<Image>().color = Color.red;
-            item2slot.GetComponent<Image>().color = Color.white;
-            item3slot.GetComponent<Image>().color = Color.white;
+            item1slotbackg.GetComponent<Image>().color = Color.red;
+            item2slotbackg.GetComponent<Image>().color = Color.white;
+            item3slotbackg.GetComponent<Image>().color = Color.white;
             break;
 
             case 1:
-            item1slot.GetComponent<Image>().color = Color.white;
-            item2slot.GetComponent<Image>().color = Color.red;
-            item3slot.GetComponent<Image>().color = Color.white;
+            item1slotbackg.GetComponent<Image>().color = Color.white;
+            item2slotbackg.GetComponent<Image>().color = Color.red;
+            item3slotbackg.GetComponent<Image>().color = Color.white;
             break;
 
             case 2:
-            item1slot.GetComponent<Image>().color = Color.white;
-            item2slot.GetComponent<Image>().color = Color.white;
-            item3slot.GetComponent<Image>().color = Color.red;
+            item1slotbackg.GetComponent<Image>().color = Color.white;
+            item2slotbackg.GetComponent<Image>().color = Color.white;
+            item3slotbackg.GetComponent<Image>().color = Color.red;
             break;
         }
-        //------------------------------------------------------------------------
+
+        doItemText();
     }
+
+    void doItemText()
+    {
+        if (checkifItem(0))
+        {
+            ItemText.GetComponent<Text>().text = "Nothing";
+        }
+        else if (checkifItem(1))
+        {
+            ItemText.GetComponent<Text>().text = "Yellow Door Lock";
+        }
+        else if (checkifItem(2))
+        {
+            ItemText.GetComponent<Text>().text = "Zesty Bar";
+        }
+    }
+    //------------------------------------------------------------------------
 
     // Called when an Item is used -----------------------------------------------
     void removeItem(int i)
@@ -248,7 +303,7 @@ public class PlayerScript : MonoBehaviour
 
         if (item3 == 0 && foundspot != true)
         {
-            item2 = item.GetComponent<ItemScript>().idofpickup;
+            item3 = item.GetComponent<ItemScript>().idofpickup;
             foundspot = true;
         }
 
