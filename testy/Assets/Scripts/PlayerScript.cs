@@ -23,8 +23,12 @@ public class PlayerScript : MonoBehaviour
     public GameObject item3slotbackg;
     public Sprite YellowDoorLockSprite;
     public Sprite ZestySprite;
+    public Sprite BSODASprite;
     public Text ItemText;
     public bool cameraflipped = false;
+    public GameObject BSODAProjectile;
+    public AudioClip SodaSpray;
+    public AudioSource AudioSource;
 
     void Start()
     {
@@ -138,7 +142,14 @@ public class PlayerScript : MonoBehaviour
                 //Detect Item Collection
                 if (hit.collider.tag == "ItemTag" && hit.distance < 8.0f)
                 {
-                    CheckInventoryPutObject(hit.collider.gameObject);
+                    if (hit.collider.gameObject.GetComponent<ItemScript>().idofpickup < 99) 
+                    {
+                        CheckInventoryPutObject(hit.collider.gameObject);
+                    }
+                    else
+                    {
+                        //Notebook protocol to go here
+                    }
                 }
             }
         }
@@ -163,7 +174,15 @@ public class PlayerScript : MonoBehaviour
             // Energy Flavored Zesty Bar
             if (checkifItem(2))
             {
-                sprint = 150f;
+                sprint = 200f;
+                removeItem(selecteditem);
+            }
+
+            //BSODA 
+            if (checkifItem(3))
+            {
+                Instantiate(BSODAProjectile, camera.transform.position, camera.transform.rotation);
+                AudioSource.PlayOneShot(SodaSpray);
                 removeItem(selecteditem);
             }
         }
@@ -200,7 +219,11 @@ public class PlayerScript : MonoBehaviour
                 case 2:
                 inventoryslots[i].SetActive(true);
                 inventoryslots[i].GetComponent<Image>().sprite = ZestySprite;
-                break;                
+                break;         
+                case 3:
+                inventoryslots[i].SetActive(true);
+                inventoryslots[i].GetComponent<Image>().sprite = BSODASprite;
+                break;         
             }
         }
 
@@ -248,6 +271,10 @@ public class PlayerScript : MonoBehaviour
         else if (checkifItem(2))
         {
             ItemText.GetComponent<Text>().text = "Energy Flavored Zesty Bar";
+        }
+        else if (checkifItem(3))
+        {
+            ItemText.GetComponent<Text>().text = "BSODA";
         }
     }
     //------------------------------------------------------------------------------

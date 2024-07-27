@@ -11,6 +11,7 @@ public class bluedoorscript : MonoBehaviour
     public AudioClip AudioOpen;
     public AudioClip AudioClose;
     public AudioSource AudioSource;
+    public GameObject DoorObject;
 
 	public void open()
     {

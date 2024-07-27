@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6164420654843992636}
   m_Layer: 0
   m_Name: PlaceFace
-  m_TagString: Untagged
+  m_TagString: EnemyTag
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,6 +140,9 @@ MonoBehaviour:
   Player: {fileID: 0}
   Enemy: {fileID: 6164420654843992517}
   seesPlayer: 0
+  myLayerMask:
+    serializedVersion: 2
+    m_Bits: 19
 --- !u!136 &6164420654843992639
 CapsuleCollider:
   m_ObjectHideFlags: 0

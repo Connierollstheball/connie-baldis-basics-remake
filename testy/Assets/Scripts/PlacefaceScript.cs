@@ -23,11 +23,12 @@ public class PlacefaceScript : MonoBehaviour
         Vector3 direction = (Player.transform.position - Enemy.transform.position).normalized;
         Ray ray = new Ray(Enemy.transform.position, direction);
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             // Does the Enemy see you? --------------------------------------
             if (hit.collider.transform.gameObject == Player)
             {
+                Debug.Log("I see you");
                 seesPlayer = true;
             }
             else
@@ -39,6 +40,7 @@ public class PlacefaceScript : MonoBehaviour
             // Getting Caught in the Principal's Room ----------------------
             if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval > 0.75f)
             {
+                Debug.Log("Rule break");
                 hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
                 Agent.speed = 10f;
             }

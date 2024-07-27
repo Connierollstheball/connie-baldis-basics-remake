@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4036182533730975464}
   - component: {fileID: 4036182533730975465}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FacultyTrigger
   m_TagString: FacultyTrigger
   m_Icon: {fileID: 0}

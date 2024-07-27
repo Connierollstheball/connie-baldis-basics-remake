@@ -368,7 +368,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2908628031702104601}
   - component: {fileID: 5060694033528200506}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: NavMeshObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
