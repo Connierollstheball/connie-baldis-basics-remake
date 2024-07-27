@@ -11,10 +11,10 @@ public class PlayerScript : MonoBehaviour
     public float sprint = 100f;
     public float guiltval = 0f;
     public bool lockedinguilt = false;
-    public int item1 = 0;
-    public int item2 = 0;
-    public int item3 = 0;
     public int selecteditem = 0;
+    int[] inventory = new int[3];
+    public GameObject[] inventoryslots = new GameObject[3];
+    public GameObject[] inventoryslotsbackg = new GameObject[3];
     public GameObject item1slot;
     public GameObject item2slot;
     public GameObject item3slot;
@@ -24,6 +24,24 @@ public class PlayerScript : MonoBehaviour
     public Sprite YellowDoorLockSprite;
     public Sprite ZestySprite;
     public Text ItemText;
+    public bool cameraflipped = false;
+
+    void Start()
+    {
+        // Set Initial Inventory "Items" ---------------------------------------------
+        inventory[0] = 0;
+        inventory[1] = 0;
+        inventory[2] = 0;
+
+        inventoryslots[0] = item1slot;
+        inventoryslots[1] = item2slot;
+        inventoryslots[2] = item3slot;
+
+        inventoryslotsbackg[0] = item1slotbackg;
+        inventoryslotsbackg[1] = item2slotbackg;
+        inventoryslotsbackg[2] = item3slotbackg;
+        //----------------------------------------------------------------------------
+    }
 
     void Update()
     {
@@ -89,7 +107,16 @@ public class PlayerScript : MonoBehaviour
         }
 
         Vector3 direction = new Vector3(xmov, 0, zmov).normalized;
-        Vector3 rotatedDirection = camera.transform.TransformDirection(direction);
+        Vector3 rotatedDirection;
+
+        if (cameraflipped == false)
+        {
+            rotatedDirection = camera.transform.TransformDirection(direction);
+        }
+        else
+        {
+            rotatedDirection = camera.transform.TransformDirection(direction) * -1;
+        }
 
         rb.velocity = rotatedDirection * multiplier;
         //-------------------------------------------------------------------
@@ -158,77 +185,56 @@ public class PlayerScript : MonoBehaviour
         }
         //------------------------------------------------------------------------
 
-        // UI Item Slot Updating -------------------------------------------------
-        // TODO: Find a better way to do this? All of the Item Stuff?
-        switch (item1)
+        // UI Item Slot Updating ------- Update this 2 whenever you add new Items ------
+        for (int i = 0; i < 3; i ++)
         {
-            case 0:
-            item1slot.SetActive(false);
-            break;
-            case 1:
-            item1slot.SetActive(true);
-            item1slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
-            break;
-            case 2:
-            item1slot.SetActive(true);
-            item1slot.GetComponent<Image>().sprite = ZestySprite;
-            break;
+            switch (inventory[i])
+            {
+                case 0:
+                inventoryslots[i].SetActive(false);
+                break;
+                case 1:
+                inventoryslots[i].SetActive(true);
+                inventoryslots[i].GetComponent<Image>().sprite = YellowDoorLockSprite;
+                break;
+                case 2:
+                inventoryslots[i].SetActive(true);
+                inventoryslots[i].GetComponent<Image>().sprite = ZestySprite;
+                break;                
+            }
         }
 
-        switch (item2)
+        for (int i = 0; i < 3; i ++)
         {
-            case 0:
-            item2slot.SetActive(false);
-            break;
-            case 1:
-            item2slot.SetActive(true);
-            item2slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
-            break;
-            case 2:
-            item2slot.SetActive(true);
-            item2slot.GetComponent<Image>().sprite = ZestySprite;
-            break;
-        }
-
-        switch (item3)
-        {
-            case 0:
-            item3slot.SetActive(false);
-            break;
-            case 1:
-            item3slot.SetActive(true);
-            item3slot.GetComponent<Image>().sprite = YellowDoorLockSprite;
-            break;
-            case 2:
-            item3slot.SetActive(true);
-            item3slot.GetComponent<Image>().sprite = ZestySprite;
-            break;
-        }
-
-        switch (selecteditem)
-        {
-            case 0:
-            item1slotbackg.GetComponent<Image>().color = Color.red;
-            item2slotbackg.GetComponent<Image>().color = Color.white;
-            item3slotbackg.GetComponent<Image>().color = Color.white;
-            break;
-
-            case 1:
-            item1slotbackg.GetComponent<Image>().color = Color.white;
-            item2slotbackg.GetComponent<Image>().color = Color.red;
-            item3slotbackg.GetComponent<Image>().color = Color.white;
-            break;
-
-            case 2:
-            item1slotbackg.GetComponent<Image>().color = Color.white;
-            item2slotbackg.GetComponent<Image>().color = Color.white;
-            item3slotbackg.GetComponent<Image>().color = Color.red;
-            break;
+            if (inventoryslotsbackg[i] == inventoryslotsbackg[selecteditem])
+            {
+                inventoryslotsbackg[i].GetComponent<Image>().color = Color.red;
+            }
+            else
+            {
+                inventoryslotsbackg[i].GetComponent<Image>().color = Color.white;
+            }
         }
 
         doItemText();
+        //------------------------------------------------------------------------------
+
+        // Camera flipping -------------------------------------------------------------
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            cameraflipped = true;
+            camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            cameraflipped = false;
+            camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
+        }
+        //------------------------------------------------------------------------------
     }
 
+    // Item Text Updating, update this too when new item ---------------------------
     void doItemText()
     {
         if (checkifItem(0))
@@ -241,41 +247,22 @@ public class PlayerScript : MonoBehaviour
         }
         else if (checkifItem(2))
         {
-            ItemText.GetComponent<Text>().text = "Zesty Bar";
+            ItemText.GetComponent<Text>().text = "Energy Flavored Zesty Bar";
         }
     }
-    //------------------------------------------------------------------------
+    //------------------------------------------------------------------------------
 
     // Called when an Item is used -----------------------------------------------
     void removeItem(int i)
     {
-        if (i == 0)
-        {
-            item1 = 0;
-        }
-        else if (i == 1)
-        {
-            item2 = 0;
-        }
-        else if (i == 2)
-        {
-            item3 = 0;
-        }
+        inventory[i] = 0;
     }
     //------------------------------------------------------------------------
 
     // Item checking protocol ---------------------------------------------------
     bool checkifItem(int i)
     {
-        if (selecteditem == 0 && item1 == i)
-        {
-            return true;
-        }
-        else if (selecteditem == 1 && item2 == i)
-        {
-            return true;
-        }
-        else if (selecteditem == 2 && item3 == i)
+        if (inventory[selecteditem] == i)
         {
             return true;
         }
@@ -289,38 +276,19 @@ public class PlayerScript : MonoBehaviour
     {
         bool foundspot = false;
 
-        if (item1 == 0)
+        for (int i = 0; i < 3; i ++)
         {
-            item1 = item.GetComponent<ItemScript>().idofpickup;
-            foundspot = true;
-        }
-
-        if (item2 == 0 && foundspot != true)
-        {
-            item2 = item.GetComponent<ItemScript>().idofpickup;
-            foundspot = true;
-        }
-
-        if (item3 == 0 && foundspot != true)
-        {
-            item3 = item.GetComponent<ItemScript>().idofpickup;
-            foundspot = true;
+            if (inventory[i] == 0)
+            {
+                inventory[i] = item.GetComponent<ItemScript>().idofpickup;
+                foundspot = true;
+                break;
+            }
         }
 
         if (foundspot != true)
         {
-            if (selecteditem == 0)
-            {
-                item1 = item.GetComponent<ItemScript>().idofpickup;
-            }
-            else if (selecteditem == 1)
-            {
-                item2 = item.GetComponent<ItemScript>().idofpickup;
-            }
-            else if (selecteditem == 2)
-            {
-                item3 = item.GetComponent<ItemScript>().idofpickup;
-            }
+            inventory[selecteditem] = item.GetComponent<ItemScript>().idofpickup;
         }
 
         Destroy(item);

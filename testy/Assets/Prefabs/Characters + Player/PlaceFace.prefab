@@ -137,8 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agent: {fileID: 6164420654843992638}
-  Player: {fileID: 5927821490713564854, guid: ce7563b09bbea524d8cd930a57271e8f, type: 3}
+  Player: {fileID: 0}
   Enemy: {fileID: 6164420654843992517}
+  seesPlayer: 0
 --- !u!136 &6164420654843992639
 CapsuleCollider:
   m_ObjectHideFlags: 0

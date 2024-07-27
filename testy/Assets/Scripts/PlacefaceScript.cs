@@ -37,7 +37,7 @@ public class PlacefaceScript : MonoBehaviour
             //---------------------------------------------------------------
 
             // Getting Caught in the Principal's Room ----------------------
-            if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval == 1)
+            if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval > 0.75f)
             {
                 hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
                 Agent.speed = 10f;

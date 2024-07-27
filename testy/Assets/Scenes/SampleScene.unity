@@ -16081,6 +16081,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5927821490713564808, guid: ce7563b09bbea524d8cd930a57271e8f,
         type: 3}
+      propertyPath: cameraflipped
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927821490713564808, guid: ce7563b09bbea524d8cd930a57271e8f,
+        type: 3}
       propertyPath: item1slotbackg
       value: 
       objectReference: {fileID: 1301103682}
