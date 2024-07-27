@@ -10,6 +10,10 @@ public class PlacefaceScript : MonoBehaviour
     public GameObject Player;
     public GameObject Enemy;
     public bool seesPlayer;
+    public LayerMask layerstohit;
+    public AudioSource AudioSource;
+    public AudioClip noFaculty;
+    public AudioClip noRunning;
 
     // Update is called once per frame
     void Update()
@@ -23,12 +27,11 @@ public class PlacefaceScript : MonoBehaviour
         Vector3 direction = (Player.transform.position - Enemy.transform.position).normalized;
         Ray ray = new Ray(Enemy.transform.position, direction);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerstohit))
         {
             // Does the Enemy see you? --------------------------------------
             if (hit.collider.transform.gameObject == Player)
             {
-                Debug.Log("I see you");
                 seesPlayer = true;
             }
             else
@@ -38,11 +41,25 @@ public class PlacefaceScript : MonoBehaviour
             //---------------------------------------------------------------
 
             // Getting Caught in the Principal's Room ----------------------
-            if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval > 0.75f)
+            if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().insideofFaculty == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false)
             {
-                Debug.Log("Rule break");
                 hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
                 Agent.speed = 10f;
+                AudioSource.PlayOneShot(noFaculty);
+            }
+            //---------------------------------------------------------------
+
+            // No running in the halls --------------------------------------
+            if (seesPlayer == true && Player.GetComponent<PlayerScript>().multiplier == 20f && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false)
+            {
+                hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval += 0.01f;
+
+                if (hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval >= 0.75f)
+                {
+                    hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
+                    Agent.speed = 10f;
+                    AudioSource.PlayOneShot(noRunning);
+                }
             }
             //---------------------------------------------------------------
         }

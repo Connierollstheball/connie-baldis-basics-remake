@@ -5,9 +5,23 @@ using UnityEngine;
 public class BSODASprayScript : MonoBehaviour
 {
     // This unfortunately is not as good at the original BBasics one, but I tried.
+    public Vector3 inittransform;
+    public float lifeSpan;
+
+    void Start()
+    {
+        inittransform = transform.forward;
+    }
+
     void Update()
     {
-        this.GetComponent<Rigidbody>().velocity = transform.forward * 12f;
+        this.GetComponent<Rigidbody>().velocity = inittransform * 12f;
+        lifeSpan += 0.01f;
+
+        if (lifeSpan > 30f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)

@@ -5,9 +5,13 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+    //TODO: move a bunch of stuff over to GameController ------------------
+    public GameObject GameController;
+    //---------------------------------------------------------------------
+    
     public Rigidbody rb;
     public Camera camera;
-    float multiplier;
+    public float multiplier;
     public float sprint = 100f;
     public float guiltval = 0f;
     public bool lockedinguilt = false;
@@ -29,6 +33,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject BSODAProjectile;
     public AudioClip SodaSpray;
     public AudioSource AudioSource;
+    public bool insideofFaculty;
 
     void Start()
     {
@@ -123,6 +128,13 @@ public class PlayerScript : MonoBehaviour
         }
 
         rb.velocity = rotatedDirection * multiplier;
+        //-------------------------------------------------------------------
+
+        // Guilt Value Cap --------------------------------------------------
+        if (guiltval > 1f)
+        {
+            guiltval = 1f;
+        }
         //-------------------------------------------------------------------
 
         //Detect Clicks -----------------------------------------------------
@@ -315,6 +327,21 @@ public class PlayerScript : MonoBehaviour
 
         if (foundspot != true)
         {
+            switch (inventory[selecteditem])
+            {
+                case 1:
+                Instantiate(GameController.GetComponent<GameControllerScript>().YellowLock, item.transform.position, item.transform.rotation);
+                break;
+
+                case 2:
+                Instantiate(GameController.GetComponent<GameControllerScript>().Zesty, item.transform.position, item.transform.rotation);
+                break;
+
+                case 3:
+                Instantiate(GameController.GetComponent<GameControllerScript>().BSODA, item.transform.position, item.transform.rotation);
+                break;
+            }
+
             inventory[selecteditem] = item.GetComponent<ItemScript>().idofpickup;
         }
 
@@ -335,7 +362,7 @@ public class PlayerScript : MonoBehaviour
         // Entering Faculty Rooms -------------------------------------------
         if (other.tag == "FacultyTrigger")
         {
-            guiltval = 1f;
+            insideofFaculty = true;
         }
         //-------------------------------------------------------------------
     }
@@ -352,7 +379,7 @@ public class PlayerScript : MonoBehaviour
         // Exiting Faculty Rooms -------------------------------------------
         if (other.tag == "FacultyTrigger" && lockedinguilt == false)
         {
-            guiltval = 0f;
+            insideofFaculty = false;
         }
         //-------------------------------------------------------------------
     }
