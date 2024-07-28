@@ -8,14 +8,17 @@ public class GameControllerScript : MonoBehaviour
     public GameObject BSODA;
     public GameObject Zesty;
     public GameObject YellowLock;
-    
-    void Start()
-    {
-        
-    }
+    public GameObject AIWanderPoints;
 
     void Update()
     {
         
+    }
+
+    public GameObject chooseWanderPoint()
+    {
+        int childrencount = 9;
+        int pointtoChoose = Random.Range(0, childrencount);
+        return AIWanderPoints.transform.GetChild(pointtoChoose).gameObject;
     }
 }

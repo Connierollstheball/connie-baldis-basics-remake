@@ -34,6 +34,10 @@ public class PlayerScript : MonoBehaviour
     public AudioClip SodaSpray;
     public AudioSource AudioSource;
     public bool insideofFaculty;
+    public GameObject Principal;
+    public float JailTime;
+    public GameObject PrincipalDoor;
+    public GameObject DetentionText;
 
     void Start()
     {
@@ -195,6 +199,10 @@ public class PlayerScript : MonoBehaviour
             {
                 Instantiate(BSODAProjectile, camera.transform.position, camera.transform.rotation);
                 AudioSource.PlayOneShot(SodaSpray);
+
+                //Principal Behavior - To be moved to Principal ---------------------------------------
+                Principal.GetComponent<PrincipalScript>().checkifseeBSODA();
+                //-------------------------------------------------------------------------------------
                 removeItem(selecteditem);
             }
         }
@@ -267,6 +275,27 @@ public class PlayerScript : MonoBehaviour
             camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
         }
         //------------------------------------------------------------------------------
+
+        // Detention Time --------------------------------------------------------------
+        if (JailTime < 0f)
+        {
+            JailTime = 0f;
+        }
+
+        JailTime -= 0.01f;
+
+        if (JailTime <= 0f)
+        {
+            PrincipalDoor.GetComponent<bluedoorscript>().unlockDoor();
+            DetentionText.SetActive(false);
+        }
+
+        if (JailTime > 0f)
+        {
+            DetentionText.SetActive(true);
+            DetentionText.GetComponent<Text>().text = "You have Detention!\n" + JailTime;
+        }
+        //------------------------------------------------------------------------------
     }
 
     // Item Text Updating, update this too when new item ---------------------------
@@ -299,7 +328,7 @@ public class PlayerScript : MonoBehaviour
     //------------------------------------------------------------------------
 
     // Item checking protocol ---------------------------------------------------
-    bool checkifItem(int i)
+    public bool checkifItem(int i)
     {
         if (inventory[selecteditem] == i)
         {
@@ -377,7 +406,7 @@ public class PlayerScript : MonoBehaviour
         //-------------------------------------------------------------------
 
         // Exiting Faculty Rooms -------------------------------------------
-        if (other.tag == "FacultyTrigger" && lockedinguilt == false)
+        if (other.tag == "FacultyTrigger")
         {
             insideofFaculty = false;
         }
