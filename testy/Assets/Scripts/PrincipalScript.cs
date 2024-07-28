@@ -63,7 +63,7 @@ public class PrincipalScript : MonoBehaviour
             //---------------------------------------------------------------
 
             // Getting Caught in the Principal's Room ----------------------
-            if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().insideofFaculty == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false)
+            if (seesPlayer == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().insideofFaculty == true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false && Player.GetComponent<PlayerScript>().JailTime <= 0.1f)
             {
                 hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
                 Agent.speed = 20f;
@@ -72,7 +72,7 @@ public class PrincipalScript : MonoBehaviour
             //---------------------------------------------------------------
 
             // No running in the halls --------------------------------------
-            if (seesPlayer == true && Player.GetComponent<PlayerScript>().multiplier == 20f && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false)
+            if (seesPlayer == true && Player.GetComponent<PlayerScript>().multiplier == 20f && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false && Player.GetComponent<PlayerScript>().JailTime <= 0.1f)
             {
                 hit.collider.transform.gameObject.GetComponent<PlayerScript>().guiltval += 0.01f;
 
@@ -94,7 +94,7 @@ public class PrincipalScript : MonoBehaviour
         Vector3 direction = (Player.transform.position - Enemy.transform.position).normalized;
         Ray ray = new Ray(Enemy.transform.position, direction);
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerstohit) && hit.collider.transform.gameObject == Player && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false)
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerstohit) && hit.collider.transform.gameObject == Player && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false && Player.GetComponent<PlayerScript>().JailTime <= 0.1f)
         {
             hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
             Agent.speed = 20f;
@@ -138,9 +138,9 @@ public class PrincipalScript : MonoBehaviour
                 this.gameObject.transform.position = TPSelf.transform.position;
                 Vector3 targetPosition = new Vector3(this.gameObject.transform.position.x, Player.transform.transform.position.y, this.gameObject.transform.position.z);
                 Player.transform.LookAt(targetPosition);
+                Player.GetComponent<PlayerScript>().lockedinguilt = false;
                 Agent.speed = 0f;
                 this.gameObject.GetComponent<Rigidbody>().velocity = this.gameObject.GetComponent<Rigidbody>().velocity * -1;
-                Player.GetComponent<PlayerScript>().lockedinguilt = false;
                 Player.GetComponent<PlayerScript>().guiltval = 0f;
                 Player.GetComponent<PlayerScript>().JailTime = 15f;
                 PrincipalDoor.GetComponent<bluedoorscript>().lockDoor();

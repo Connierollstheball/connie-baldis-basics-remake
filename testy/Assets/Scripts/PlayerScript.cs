@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     //TODO: move a bunch of stuff over to GameController ------------------
+    //TODO: make the Principal's Keys functional
     public GameObject GameController;
     //---------------------------------------------------------------------
     
@@ -56,12 +57,22 @@ public class PlayerScript : MonoBehaviour
         //----------------------------------------------------------------------------
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        // Detention Time ---------- Rest in Update ---------------------------------
+        JailTime -= 0.025f;
+
+        if (JailTime > 0f)
+        {
+            DetentionText.SetActive(true);
+            DetentionText.GetComponent<Text>().text = "You have Detention!\n" + Mathf.Round(JailTime);
+        }
+        //------------------------------------------------------------------------
+
+        //Other Move Logic ----------------------------------------------------------
         float xmov = 0f;
         float zmov = 0f;
 
-        //Other Move Logic ----------------------------------------------------------
         if (Input.GetKey(KeyCode.W))
         {
             zmov = 1f;
@@ -97,11 +108,11 @@ public class PlayerScript : MonoBehaviour
 
             if (rb.velocity.magnitude != 0)
             {
-                sprint -= 0.1f;
+                sprint -= 0.25f;
             }
             else
             {
-                sprint += 0.1f;
+                sprint += 0.25f;
             }
         }
         else
@@ -110,7 +121,7 @@ public class PlayerScript : MonoBehaviour
 
             if (sprint < 100f && rb.velocity.magnitude == 0) 
             {
-                sprint += 0.1f;
+                sprint += 0.25f;
             }
         }
 
@@ -133,7 +144,10 @@ public class PlayerScript : MonoBehaviour
 
         rb.velocity = rotatedDirection * multiplier;
         //-------------------------------------------------------------------
+    }
 
+    void Update()
+    {
         // Guilt Value Cap --------------------------------------------------
         if (guiltval > 1f)
         {
@@ -164,7 +178,14 @@ public class PlayerScript : MonoBehaviour
                     }
                     else
                     {
-                        //Notebook protocol to go here
+                        GameController.GetComponent<GameControllerScript>().NotebookCount += 1;
+
+                        if (sprint < 100f)
+                        {
+                            sprint = 100f;
+                        }
+                    
+                        Destroy(hit.collider.gameObject);
                     }
                 }
             }
@@ -276,24 +297,16 @@ public class PlayerScript : MonoBehaviour
         }
         //------------------------------------------------------------------------------
 
-        // Detention Time --------------------------------------------------------------
+        // Detention Time ----------------------------- Rest in Fixed Update -----------
         if (JailTime < 0f)
         {
             JailTime = 0f;
         }
 
-        JailTime -= 0.01f;
-
         if (JailTime <= 0f)
         {
             PrincipalDoor.GetComponent<bluedoorscript>().unlockDoor();
             DetentionText.SetActive(false);
-        }
-
-        if (JailTime > 0f)
-        {
-            DetentionText.SetActive(true);
-            DetentionText.GetComponent<Text>().text = "You have Detention!\n" + JailTime;
         }
         //------------------------------------------------------------------------------
     }

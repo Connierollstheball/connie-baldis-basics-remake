@@ -112,7 +112,8 @@ MonoBehaviour:
     m_Bits: 19
   TPPlayer: {fileID: 0}
   TPSelf: {fileID: 0}
-  ignoringPlayer: 0
+  GameController: {fileID: 0}
+  PrincipalDoor: {fileID: 0}
 --- !u!54 &2411861020146836676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,8 +162,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.2799999
-  m_Height: 5.1199994
+  m_Radius: 1
+  m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2411861020146836673
