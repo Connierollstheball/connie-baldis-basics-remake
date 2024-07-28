@@ -29,6 +29,7 @@ public class PlayerScript : MonoBehaviour
     public Sprite YellowDoorLockSprite;
     public Sprite ZestySprite;
     public Sprite BSODASprite;
+    public Sprite KeySprite;
     public Text ItemText;
     public bool cameraflipped = false;
     public GameObject BSODAProjectile;
@@ -39,6 +40,7 @@ public class PlayerScript : MonoBehaviour
     public float JailTime;
     public GameObject PrincipalDoor;
     public GameObject DetentionText;
+    public bool inJailTrigger = false;
 
     void Start()
     {
@@ -174,10 +176,12 @@ public class PlayerScript : MonoBehaviour
                 {
                     if (hit.collider.gameObject.GetComponent<ItemScript>().idofpickup < 99) 
                     {
+                        // Item collection logic -------------------------------------------
                         CheckInventoryPutObject(hit.collider.gameObject);
                     }
                     else
                     {
+                        // Notebook logic --------------------------------------------------
                         GameController.GetComponent<GameControllerScript>().NotebookCount += 1;
 
                         if (sprint < 100f)
@@ -204,6 +208,13 @@ public class PlayerScript : MonoBehaviour
                 if (hit.collider.tag == "SwingDoor" && hit.distance < 8.0f && hit.collider.gameObject.GetComponent<swingdoorscript>().lockedDoor == false && checkifItem(1))
                 {
                     hit.collider.gameObject.GetComponent<swingdoorscript>().lockDoor();
+                    removeItem(selecteditem);
+                }
+                
+                //Principal's Key
+                if (hit.collider.tag == "BlueDoor" && hit.distance < 8.0f && hit.collider.gameObject.transform.parent.gameObject.GetComponent<bluedoorscript>().lockedDoor == true && checkifItem(4))
+                {
+                    hit.collider.gameObject.transform.parent.gameObject.GetComponent<bluedoorscript>().unlockDoor();
                     removeItem(selecteditem);
                 }
             }
@@ -243,6 +254,8 @@ public class PlayerScript : MonoBehaviour
         {
             selecteditem = 2;
         }
+
+        // TODO: Add scrollwheel selection
         //------------------------------------------------------------------------
 
         // UI Item Slot Updating ------- Update this 2 whenever you add new Items ------
@@ -264,7 +277,11 @@ public class PlayerScript : MonoBehaviour
                 case 3:
                 inventoryslots[i].SetActive(true);
                 inventoryslots[i].GetComponent<Image>().sprite = BSODASprite;
-                break;         
+                break;
+                case 4:
+                inventoryslots[i].SetActive(true);
+                inventoryslots[i].GetComponent<Image>().sprite = KeySprite;
+                break;           
             }
         }
 
@@ -330,6 +347,10 @@ public class PlayerScript : MonoBehaviour
         {
             ItemText.GetComponent<Text>().text = "BSODA";
         }
+        else if (checkifItem(4))
+        {
+            ItemText.GetComponent<Text>().text = "Principals Keys";
+        }
     }
     //------------------------------------------------------------------------------
 
@@ -352,7 +373,7 @@ public class PlayerScript : MonoBehaviour
     }
     //------------------------------------------------------------------------
 
-    // Protocol to put Items in someone's inventory --------------------------
+    // Protocol to put Items in someone's inventory ---------------------------
     void CheckInventoryPutObject(GameObject item)
     {
         bool foundspot = false;
@@ -371,6 +392,7 @@ public class PlayerScript : MonoBehaviour
         {
             switch (inventory[selecteditem])
             {
+                // Also to be updated when a new item is added -----
                 case 1:
                 Instantiate(GameController.GetComponent<GameControllerScript>().YellowLock, item.transform.position, item.transform.rotation);
                 break;
@@ -381,6 +403,10 @@ public class PlayerScript : MonoBehaviour
 
                 case 3:
                 Instantiate(GameController.GetComponent<GameControllerScript>().BSODA, item.transform.position, item.transform.rotation);
+                break;
+
+                case 4:
+                Instantiate(GameController.GetComponent<GameControllerScript>().Key, item.transform.position, item.transform.rotation);
                 break;
             }
 
@@ -407,6 +433,13 @@ public class PlayerScript : MonoBehaviour
             insideofFaculty = true;
         }
         //-------------------------------------------------------------------
+
+        // Office Room ------------------------------------------------------
+        if (other.tag == "OfficeTrigger")
+        {
+            inJailTrigger = true;
+        }
+        //-------------------------------------------------------------------
     }
 
     private void OnTriggerExit(Collider other)
@@ -422,6 +455,13 @@ public class PlayerScript : MonoBehaviour
         if (other.tag == "FacultyTrigger")
         {
             insideofFaculty = false;
+        }
+        //-------------------------------------------------------------------
+
+        // Office Room ------------------------------------------------------
+        if (other.tag == "OfficeTrigger")
+        {
+            inJailTrigger = false;
         }
         //-------------------------------------------------------------------
     }

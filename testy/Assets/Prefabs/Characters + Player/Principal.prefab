@@ -104,6 +104,7 @@ MonoBehaviour:
   noFaculty: {fileID: 8300000, guid: e7c776a353f2bc542a6015c941308264, type: 3}
   noRunning: {fileID: 8300000, guid: 2409a62fcc14bc74db8c4f3744fe9836, type: 3}
   noDrink: {fileID: 8300000, guid: 3cb9d1502b12ca849b23f161ccad878c, type: 3}
+  noEscape: {fileID: 8300000, guid: f69fb338fdee6254db9eeda80bd9b257, type: 3}
   Enemy: {fileID: 2411861020146836672}
   AudioSource: {fileID: 2411861020146836664}
   seesPlayer: 0
@@ -162,8 +163,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 1
+  m_Radius: 0.5
+  m_Height: 5
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2411861020146836673
@@ -193,7 +194,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

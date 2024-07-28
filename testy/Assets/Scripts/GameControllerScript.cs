@@ -9,6 +9,7 @@ public class GameControllerScript : MonoBehaviour
     public GameObject BSODA;
     public GameObject Zesty;
     public GameObject YellowLock;
+    public GameObject Key;
     public GameObject AIWanderPoints;
     public int NotebookCount;
     public int NotebookTotal = 1;

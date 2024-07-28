@@ -10,6 +10,7 @@ public class PrincipalScript : MonoBehaviour
     public AudioClip noFaculty;
     public AudioClip noRunning;
     public AudioClip noDrink;
+    public AudioClip noEscape;
     public GameObject Enemy;
     public AudioSource AudioSource;
     public bool seesPlayer;
@@ -84,6 +85,15 @@ public class PrincipalScript : MonoBehaviour
                 }
             }
             //---------------------------------------------------------------
+
+            // No escaping detention in the halls ---------------------------
+            if (seesPlayer == true && Player.GetComponent<PlayerScript>().JailTime > 0.1f && Player.GetComponent<PlayerScript>().inJailTrigger != true && hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt == false)
+            {
+                hit.collider.transform.gameObject.GetComponent<PlayerScript>().lockedinguilt = true;
+                Agent.speed = 20f;
+                AudioSource.PlayOneShot(noEscape);
+            }
+            //---------------------------------------------------------------
         }
     }
 
@@ -135,15 +145,18 @@ public class PrincipalScript : MonoBehaviour
             if (Player.GetComponent<PlayerScript>().lockedinguilt == true)
             {
                 Player.transform.position = TPPlayer.transform.position;
-                this.gameObject.transform.position = TPSelf.transform.position;
+                // Why the fuck was the NavMeshAgent even interfering with this shit???????
+                Agent.enabled = false;
+                Enemy.transform.position = TPSelf.transform.position;
+                Agent.enabled = true;
+                Agent.speed = 0f;
                 Vector3 targetPosition = new Vector3(this.gameObject.transform.position.x, Player.transform.transform.position.y, this.gameObject.transform.position.z);
                 Player.transform.LookAt(targetPosition);
                 Player.GetComponent<PlayerScript>().lockedinguilt = false;
-                Agent.speed = 0f;
-                this.gameObject.GetComponent<Rigidbody>().velocity = this.gameObject.GetComponent<Rigidbody>().velocity * -1;
                 Player.GetComponent<PlayerScript>().guiltval = 0f;
                 Player.GetComponent<PlayerScript>().JailTime = 15f;
                 PrincipalDoor.GetComponent<bluedoorscript>().lockDoor();
+                Enemy.transform.position = TPSelf.transform.position;
                 Invoke("gotowardsPoint", 2f);
             }
             //-----------------------------------------------------------

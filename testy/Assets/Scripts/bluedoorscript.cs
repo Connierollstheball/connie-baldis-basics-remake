@@ -12,11 +12,11 @@ public class bluedoorscript : MonoBehaviour
     public AudioClip AudioClose;
     public AudioSource AudioSource;
     public GameObject DoorObject;
-    public bool locked = false;
+    public bool lockedDoor = false;
 
 	public void open()
     {
-        if (locked == false || this.gameObject.tag == "BlueDoor")
+        if (lockedDoor == false || this.gameObject.tag == "BlueDoor")
         {
             CancelInvoke("close");
             DoorOne.GetComponent<Renderer>().material = DoorOpen;
@@ -66,11 +66,11 @@ public class bluedoorscript : MonoBehaviour
 
     public void lockDoor()
     {
-        locked = true;
+        lockedDoor = true;
     }
 
     public void unlockDoor()
     {
-        locked = false;
+        lockedDoor = false;
     }
 }
