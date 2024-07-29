@@ -15,11 +15,14 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        if (this.gameObject.transform.parent.gameObject.GetComponent<PlayerScript>().caught == false)
+        {
+            float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 
-        yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+            yRotation += mouseX;
+            yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
-        playerBody.Rotate(Vector3.up * mouseX * 5f);
+            playerBody.Rotate(Vector3.up * mouseX * 5f);
+        }
     }
 }

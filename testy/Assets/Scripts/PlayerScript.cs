@@ -41,6 +41,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject PrincipalDoor;
     public GameObject DetentionText;
     public bool inJailTrigger = false;
+    public bool caught = false;
 
     void Start()
     {
@@ -158,7 +159,7 @@ public class PlayerScript : MonoBehaviour
         //-------------------------------------------------------------------
 
         //Detect Clicks -----------------------------------------------------
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && caught == false)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -197,7 +198,7 @@ public class PlayerScript : MonoBehaviour
         //-------------------------------------------------------------------
 
         // Item Uses --------------------------------------------------------------
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1) && caught == false)
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -240,19 +241,22 @@ public class PlayerScript : MonoBehaviour
         }
 
         // Inventory Selection ----------------------------------------------------
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (caught == false)
         {
-            selecteditem = 0;
-        }
+            if (Input.GetKey(KeyCode.Alpha1))
+            {
+                selecteditem = 0;
+            }
 
-        if (Input.GetKey(KeyCode.Alpha2))
-        {
-            selecteditem = 1;
-        }
+            if (Input.GetKey(KeyCode.Alpha2))
+            {
+                selecteditem = 1;
+            }
 
-        if (Input.GetKey(KeyCode.Alpha3))
-        {
-            selecteditem = 2;
+            if (Input.GetKey(KeyCode.Alpha3))
+            {
+                selecteditem = 2;
+            }
         }
 
         // TODO: Add scrollwheel selection
@@ -301,16 +305,19 @@ public class PlayerScript : MonoBehaviour
         //------------------------------------------------------------------------------
 
         // Camera flipping -------------------------------------------------------------
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (caught == false)
         {
-            cameraflipped = true;
-            camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
-        }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                cameraflipped = true;
+                camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
+            }
 
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            cameraflipped = false;
-            camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                cameraflipped = false;
+                camera.transform.rotation = camera.transform.rotation * Quaternion.Euler(0, 180, 0);
+            }
         }
         //------------------------------------------------------------------------------
 
