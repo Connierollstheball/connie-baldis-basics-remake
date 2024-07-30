@@ -12,7 +12,7 @@ All other assets (Textures and Audio Files) were taken directly from Baldi's Bas
 
 On the off-chance that you have problems with oppening the project file up, please DM me on Discord **(connie_of_ro)** and I'll see if I can fix it.
 
-## Similarity to the Baldi's Basics Classic
+## Similarity to Baldi's Basics Classic
 Currently, the project doesn't have everything BBs Classic has, and some of the other stuff that is in the project (specifically character behaviors, but other stuff too) may not 1-to-1 match what is seen in Baldi's Basics Classic.
 I am, however, relatively actively working towards adding more stuff and enhancing the experience.
 
