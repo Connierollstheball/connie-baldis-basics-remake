@@ -42,6 +42,7 @@ public class PlayerScript : MonoBehaviour
     public GameObject DetentionText;
     public bool inJailTrigger = false;
     public bool caught = false;
+    public GameObject Baldi;
 
     void Start()
     {
@@ -170,6 +171,7 @@ public class PlayerScript : MonoBehaviour
                 if (hit.collider.tag == "BlueDoor" && hit.distance < 8.0f)
                 {
                     hit.collider.gameObject.transform.parent.gameObject.GetComponent<bluedoorscript>().open();
+                    Baldi.GetComponent<BaldiScript>().BaldiSetDestination(hit.collider.gameObject);
                 }
 
                 //Detect Item Collection
@@ -431,6 +433,7 @@ public class PlayerScript : MonoBehaviour
         {
             other.GetComponent<swingdoorscript>().open();
             other.GetComponent<swingdoorscript>().somethinginside = true;
+            Baldi.GetComponent<BaldiScript>().BaldiSetDestination(other.gameObject);
         }
         //-------------------------------------------------------------------
 

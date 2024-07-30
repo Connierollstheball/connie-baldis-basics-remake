@@ -19,6 +19,7 @@ public class PrincipalScript : MonoBehaviour
     public GameObject TPSelf;
     public GameObject GameController;
     public GameObject PrincipalDoor;
+    public GameObject Baldi;
 
     void Start()
     {
@@ -157,6 +158,7 @@ public class PrincipalScript : MonoBehaviour
                 Player.GetComponent<PlayerScript>().JailTime = 15f;
                 PrincipalDoor.GetComponent<bluedoorscript>().lockDoor();
                 Enemy.transform.position = TPSelf.transform.position;
+                Baldi.GetComponent<BaldiScript>().BaldiSetDestination(Player);
                 Invoke("gotowardsPoint", 2f);
             }
             //-----------------------------------------------------------

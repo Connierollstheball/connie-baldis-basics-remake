@@ -7649,6 +7649,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 67
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: -90}
+--- !u!1 &660395564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5186465337457636618, guid: 413d9bf310e19fd42a601d2efdaefbd3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5186465337019926383}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &672228125
 GameObject:
   m_ObjectHideFlags: 0
@@ -23802,6 +23808,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2411861020146836677, guid: 0e96621791165bf42bd46ba6150c4865,
         type: 3}
+      propertyPath: Baldi
+      value: 
+      objectReference: {fileID: 660395564}
+    - target: {fileID: 2411861020146836677, guid: 0e96621791165bf42bd46ba6150c4865,
+        type: 3}
       propertyPath: Player
       value: 
       objectReference: {fileID: 262993756}
@@ -24175,11 +24186,26 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 262993756}
+    - target: {fileID: 5186465337457636611, guid: 413d9bf310e19fd42a601d2efdaefbd3,
+        type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 136582610}
     - target: {fileID: 5186465337457636613, guid: 413d9bf310e19fd42a601d2efdaefbd3,
         type: 3}
       propertyPath: m_Radius
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 5186465337457636614, guid: 413d9bf310e19fd42a601d2efdaefbd3,
+        type: 3}
+      propertyPath: m_Animations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5186465337457636614, guid: 413d9bf310e19fd42a601d2efdaefbd3,
+        type: 3}
+      propertyPath: m_Animations.Array.data[0]
+      value: 
+      objectReference: {fileID: 7400000, guid: 0249043273c3f954b8e2aa0f77925ada, type: 2}
     - target: {fileID: 5186465337457636615, guid: 413d9bf310e19fd42a601d2efdaefbd3,
         type: 3}
       propertyPath: m_RootOrder
@@ -24240,7 +24266,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Baldi
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5186465337457636614, guid: 413d9bf310e19fd42a601d2efdaefbd3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 413d9bf310e19fd42a601d2efdaefbd3, type: 3}
 --- !u!1001 &5927821490786689514
 PrefabInstance:
@@ -24264,6 +24291,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5927821490713564808, guid: ce7563b09bbea524d8cd930a57271e8f,
+        type: 3}
+      propertyPath: Baldi
+      value: 
+      objectReference: {fileID: 660395564}
     - target: {fileID: 5927821490713564808, guid: ce7563b09bbea524d8cd930a57271e8f,
         type: 3}
       propertyPath: sprint

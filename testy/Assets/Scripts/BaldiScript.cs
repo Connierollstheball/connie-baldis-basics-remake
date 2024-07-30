@@ -13,6 +13,7 @@ public class BaldiScript : MonoBehaviour
     public bool seesPlayer = false;
     public AudioSource AudioSource;
     public AudioClip SlapSound;
+    public GameObject GameController;
 
     // Start is called before the first frame update
     void Start()
@@ -20,13 +21,15 @@ public class BaldiScript : MonoBehaviour
         // Start the slaps
         Agent.speed = 0f;
         SlapLoop();
+        GameObject WanderPoint = GameController.GetComponent<GameControllerScript>().chooseWanderPoint();
+        Agent.destination = WanderPoint.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
         // Temporary Destination
-        Agent.destination = Player.transform.position;
+        //Agent.destination = Player.transform.position;
 
         // Character's Vision (chracter will look for the player) -----------
         RaycastHit hit;
@@ -46,6 +49,22 @@ public class BaldiScript : MonoBehaviour
             }
             //---------------------------------------------------------------
         }
+
+        // Player Spotted ---------------------------------------------------
+        if (seesPlayer == true)
+        {
+            Agent.destination = Player.transform.position;
+        }
+        //-------------------------------------------------------------------
+
+
+        // Player not at destination? Wander again ---------------------------
+        if (Agent.remainingDistance <= Agent.stoppingDistance && seesPlayer == false)
+        {
+            GameObject WanderPoint = GameController.GetComponent<GameControllerScript>().chooseWanderPoint();
+            Agent.destination = WanderPoint.transform.position;
+        }
+        //-------------------------------------------------------------------
     }
 
     // Slap Logic -------------------------------------------
@@ -130,6 +149,11 @@ public class BaldiScript : MonoBehaviour
             other.GetComponent<swingdoorscript>().somethinginside = false;
         }
         //-------------------------------------------------------------------
+    }
+
+    public void BaldiSetDestination(GameObject pointgo)
+    {
+        Agent.destination = pointgo.transform.position;
     }
 
     void onGameDone()
