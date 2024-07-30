@@ -7,7 +7,7 @@ All other assets (Textures and Audio Files) were taken directly from Baldi's Bas
 
 ## Running
 1) Clone the Repository
-2) Obviously, you gotta have Unity to be able to open this
+2) Obviously, you gotta have Unity to be able to open this (Version this project was made in is **2019.4.29f1**)
 3) Literally just open the Project in Unity
 
 On the off-chance that you have problems with oppening the project file up, please DM me on Discord **(connie_of_ro)** and I'll see if I can fix it.
