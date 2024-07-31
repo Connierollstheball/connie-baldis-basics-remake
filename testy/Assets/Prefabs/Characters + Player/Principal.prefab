@@ -115,6 +115,7 @@ MonoBehaviour:
   TPSelf: {fileID: 0}
   GameController: {fileID: 0}
   PrincipalDoor: {fileID: 0}
+  Baldi: {fileID: 0}
 --- !u!54 &2411861020146836676
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -203,10 +204,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 5
+  MaxDistance: 200
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -239,7 +240,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

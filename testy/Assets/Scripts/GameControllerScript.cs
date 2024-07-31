@@ -18,6 +18,11 @@ public class GameControllerScript : MonoBehaviour
     void Update()
     {
         NotebookCountText.GetComponent<Text>().text = NotebookCount + "/" + NotebookTotal + " Notebooks";
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public GameObject chooseWanderPoint()

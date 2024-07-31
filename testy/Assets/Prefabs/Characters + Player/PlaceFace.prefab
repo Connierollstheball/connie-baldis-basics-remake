@@ -148,6 +148,9 @@ MonoBehaviour:
   noFaculty: {fileID: 8300000, guid: e7c776a353f2bc542a6015c941308264, type: 3}
   noRunning: {fileID: 8300000, guid: 2409a62fcc14bc74db8c4f3744fe9836, type: 3}
   noDrink: {fileID: 8300000, guid: 3cb9d1502b12ca849b23f161ccad878c, type: 3}
+  TPPlayer: {fileID: 0}
+  TPSelf: {fileID: 0}
+  ignoringPlayer: 0
 --- !u!136 &6164420654843992639
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -198,10 +201,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 5
+  MaxDistance: 200
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -234,7 +237,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

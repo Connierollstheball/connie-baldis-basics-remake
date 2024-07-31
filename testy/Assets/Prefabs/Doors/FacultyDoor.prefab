@@ -338,7 +338,7 @@ MonoBehaviour:
   AudioClose: {fileID: 8300000, guid: 2d94d33159136544ba2515f5857cbbcd, type: 3}
   AudioSource: {fileID: 7258797825628976534}
   DoorObject: {fileID: 7258797825628976536}
-  locked: 0
+  lockedDoor: 0
 --- !u!82 &7258797825628976534
 AudioSource:
   m_ObjectHideFlags: 0
@@ -359,10 +359,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 5
+  MaxDistance: 200
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -395,7 +395,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

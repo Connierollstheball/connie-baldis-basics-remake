@@ -471,13 +471,22 @@ public class PlayerScript : MonoBehaviour
         }
         //-------------------------------------------------------------------
 
-        // Swinging Doors ---------------------------------------------------
+        // Finish Doors -----------------------------------------------------
         if (other.tag == "FinalSwingDoor" && GameController.GetComponent<GameControllerScript>().NotebookCount == GameController.GetComponent<GameControllerScript>().NotebookTotal)
         {
             other.GetComponent<swingdoorscript>().open();
             other.GetComponent<swingdoorscript>().somethinginside = true;
             Baldi.GetComponent<BaldiScript>().BaldiSetDestination(other.gameObject);
             SceneManager.LoadScene("FinishScreen");
+        }
+        //-------------------------------------------------------------------
+
+        // Start Door -------------------------------------------------------
+        if (other.tag == "StartGameDoor")
+        {
+            other.GetComponent<swingdoorscript>().open();
+            other.GetComponent<swingdoorscript>().somethinginside = true;
+            SceneManager.LoadScene("SchoolHouse");
         }
         //-------------------------------------------------------------------
     }
