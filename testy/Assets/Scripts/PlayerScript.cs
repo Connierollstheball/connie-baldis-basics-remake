@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -259,6 +260,25 @@ public class PlayerScript : MonoBehaviour
             {
                 selecteditem = 2;
             }
+
+            if (Input.mouseScrollDelta.y == 1f)
+            {
+                selecteditem -= 1;
+
+                if (selecteditem < 0) 
+                {
+                    selecteditem = 2;
+                }
+            }
+            else if (Input.mouseScrollDelta.y == -1f)
+            {
+                selecteditem += 1;
+
+                if (selecteditem > 2)
+                {
+                    selecteditem = 0;
+                }
+            }
         }
 
         // TODO: Add scrollwheel selection
@@ -448,6 +468,16 @@ public class PlayerScript : MonoBehaviour
         if (other.tag == "OfficeTrigger")
         {
             inJailTrigger = true;
+        }
+        //-------------------------------------------------------------------
+
+        // Swinging Doors ---------------------------------------------------
+        if (other.tag == "FinalSwingDoor" && GameController.GetComponent<GameControllerScript>().NotebookCount == GameController.GetComponent<GameControllerScript>().NotebookTotal)
+        {
+            other.GetComponent<swingdoorscript>().open();
+            other.GetComponent<swingdoorscript>().somethinginside = true;
+            Baldi.GetComponent<BaldiScript>().BaldiSetDestination(other.gameObject);
+            SceneManager.LoadScene("FinishScreen");
         }
         //-------------------------------------------------------------------
     }

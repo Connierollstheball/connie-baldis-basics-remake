@@ -71,6 +71,7 @@ public class BaldiScript : MonoBehaviour
     // Slap Looping
     void SlapLoop()
     {
+        this.gameObject.GetComponent<Animator>().SetTrigger("slap");
         Slap();
         Invoke("SlapLoop", 2.0f);
     }
