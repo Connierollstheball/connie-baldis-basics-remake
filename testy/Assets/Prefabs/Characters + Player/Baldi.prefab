@@ -237,7 +237,9 @@ MonoBehaviour:
   seesPlayer: 0
   AudioSource: {fileID: 5186465337457636609}
   SlapSound: {fileID: 8300000, guid: 584d2932703936542a32fd0d4a050843, type: 3}
+  ScreechSound: {fileID: 8300000, guid: 3654c98bb2de1574a9f53a9233cf7c06, type: 3}
   GameController: {fileID: 0}
+  HUD: {fileID: 0}
 --- !u!195 &5186465337457636612
 NavMeshAgent:
   m_ObjectHideFlags: 0

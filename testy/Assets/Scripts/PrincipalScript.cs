@@ -142,28 +142,47 @@ public class PrincipalScript : MonoBehaviour
         if (other.gameObject == Player && seesPlayer == true)
         {
             // Detention ---- Another Principal Function ---------------
-            // TODO: Complete this
             if (Player.GetComponent<PlayerScript>().lockedinguilt == true)
             {
-                Player.transform.position = TPPlayer.transform.position;
-                // Why the fuck was the NavMeshAgent even interfering with this shit???????
-                Agent.enabled = false;
-                Enemy.transform.position = TPSelf.transform.position;
-                Agent.enabled = true;
-                Agent.speed = 0f;
-                Vector3 targetPosition = new Vector3(this.gameObject.transform.position.x, Player.transform.transform.position.y, this.gameObject.transform.position.z);
-                Player.transform.LookAt(targetPosition);
-                Player.GetComponent<PlayerScript>().lockedinguilt = false;
-                Player.GetComponent<PlayerScript>().guiltval = 0f;
-                Player.GetComponent<PlayerScript>().JailTime = 15f;
-                PrincipalDoor.GetComponent<bluedoorscript>().lockDoor();
-                Enemy.transform.position = TPSelf.transform.position;
-                Baldi.GetComponent<BaldiScript>().BaldiSetDestination(Player);
-                Invoke("gotowardsPoint", 2f);
+                detentionTime();
             }
             //-----------------------------------------------------------
         }
         //-------------------------------------------------------------------
+    }
+
+    //If the player is already colliding with the Principal, detention him if he's guilty -----------
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject == Player && seesPlayer == true)
+        {
+            // Detention ---- Another Principal Function ---------------
+            if (Player.GetComponent<PlayerScript>().lockedinguilt == true)
+            {
+                detentionTime();
+            }
+            //-----------------------------------------------------------
+        }
+    }
+    //------------------------------------------------------------------------------------------------
+
+    void detentionTime()
+    {
+        Player.transform.position = TPPlayer.transform.position;
+        // Why the fuck was the NavMeshAgent even interfering with this shit???????
+        Agent.enabled = false;
+        Enemy.transform.position = TPSelf.transform.position;
+        Agent.enabled = true;
+        Agent.speed = 0f;
+        Vector3 targetPosition = new Vector3(this.gameObject.transform.position.x, Player.transform.transform.position.y, this.gameObject.transform.position.z);
+        Player.transform.LookAt(targetPosition);
+        Player.GetComponent<PlayerScript>().lockedinguilt = false;
+        Player.GetComponent<PlayerScript>().guiltval = 0f;
+        Player.GetComponent<PlayerScript>().JailTime = 15f;
+        PrincipalDoor.GetComponent<bluedoorscript>().lockDoor();
+        Enemy.transform.position = TPSelf.transform.position;
+        Baldi.GetComponent<BaldiScript>().BaldiSetDestination(Player);
+        Invoke("gotowardsPoint", 2f);
     }
 
     // Speed when returning to original point --------------------------

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//NOTICE: When you make a new level, put the new scene name in CheckIfLevel()!!
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +9,6 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     //TODO: move a bunch of stuff over to GameController ------------------
-    //TODO: make the Principal's Keys functional
     public GameObject GameController;
     //---------------------------------------------------------------------
     
@@ -65,12 +66,15 @@ public class PlayerScript : MonoBehaviour
     void FixedUpdate()
     {
         // Detention Time ---------- Rest in Update ---------------------------------
-        JailTime -= 0.025f;
-
-        if (JailTime > 0f)
+        if (CheckIfLevel(SceneManager.GetActiveScene().name))
         {
-            DetentionText.SetActive(true);
-            DetentionText.GetComponent<Text>().text = "You have Detention!\n" + Mathf.Round(JailTime);
+            JailTime -= 0.025f;
+
+            if (JailTime > 0f)
+            {
+                DetentionText.SetActive(true);
+                DetentionText.GetComponent<Text>().text = "You have Detention!\n" + Mathf.Round(JailTime);
+            }
         }
         //------------------------------------------------------------------------
 
@@ -157,6 +161,13 @@ public class PlayerScript : MonoBehaviour
         if (guiltval > 1f)
         {
             guiltval = 1f;
+        }
+        //-------------------------------------------------------------------
+
+        // Quit App (to be replaced with pause menu) ------------------------
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
         }
         //-------------------------------------------------------------------
 
@@ -280,50 +291,51 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
-
-        // TODO: Add scrollwheel selection
         //------------------------------------------------------------------------
 
         // UI Item Slot Updating ------- Update this 2 whenever you add new Items ------
-        for (int i = 0; i < 3; i ++)
+        if (CheckIfLevel(SceneManager.GetActiveScene().name))
         {
-            switch (inventory[i])
+            for (int i = 0; i < 3; i ++)
             {
-                case 0:
-                inventoryslots[i].SetActive(false);
-                break;
-                case 1:
-                inventoryslots[i].SetActive(true);
-                inventoryslots[i].GetComponent<Image>().sprite = YellowDoorLockSprite;
-                break;
-                case 2:
-                inventoryslots[i].SetActive(true);
-                inventoryslots[i].GetComponent<Image>().sprite = ZestySprite;
-                break;         
-                case 3:
-                inventoryslots[i].SetActive(true);
-                inventoryslots[i].GetComponent<Image>().sprite = BSODASprite;
-                break;
-                case 4:
-                inventoryslots[i].SetActive(true);
-                inventoryslots[i].GetComponent<Image>().sprite = KeySprite;
-                break;           
+                switch (inventory[i])
+                {
+                    case 0:
+                    inventoryslots[i].SetActive(false);
+                    break;
+                    case 1:
+                    inventoryslots[i].SetActive(true);
+                    inventoryslots[i].GetComponent<Image>().sprite = YellowDoorLockSprite;
+                    break;
+                    case 2:
+                    inventoryslots[i].SetActive(true);
+                    inventoryslots[i].GetComponent<Image>().sprite = ZestySprite;
+                    break;         
+                    case 3:
+                    inventoryslots[i].SetActive(true);
+                    inventoryslots[i].GetComponent<Image>().sprite = BSODASprite;
+                    break;
+                    case 4:
+                    inventoryslots[i].SetActive(true);
+                    inventoryslots[i].GetComponent<Image>().sprite = KeySprite;
+                    break;           
+                }
             }
-        }
 
-        for (int i = 0; i < 3; i ++)
-        {
-            if (inventoryslotsbackg[i] == inventoryslotsbackg[selecteditem])
+            for (int i = 0; i < 3; i ++)
             {
-                inventoryslotsbackg[i].GetComponent<Image>().color = Color.red;
+                if (inventoryslotsbackg[i] == inventoryslotsbackg[selecteditem])
+                {
+                    inventoryslotsbackg[i].GetComponent<Image>().color = Color.red;
+                }
+                else
+                {
+                    inventoryslotsbackg[i].GetComponent<Image>().color = Color.white;
+                }
             }
-            else
-            {
-                inventoryslotsbackg[i].GetComponent<Image>().color = Color.white;
-            }
-        }
 
-        doItemText();
+            doItemText();
+        }
         //------------------------------------------------------------------------------
 
         // Camera flipping -------------------------------------------------------------
@@ -344,15 +356,18 @@ public class PlayerScript : MonoBehaviour
         //------------------------------------------------------------------------------
 
         // Detention Time ----------------------------- Rest in Fixed Update -----------
-        if (JailTime < 0f)
+        if (CheckIfLevel(SceneManager.GetActiveScene().name))
         {
-            JailTime = 0f;
-        }
+            if (JailTime < 0f)
+            {
+                JailTime = 0f;
+            }
 
-        if (JailTime <= 0f)
-        {
-            PrincipalDoor.GetComponent<bluedoorscript>().unlockDoor();
-            DetentionText.SetActive(false);
+            if (JailTime <= 0f)
+            {
+                PrincipalDoor.GetComponent<bluedoorscript>().unlockDoor();
+                DetentionText.SetActive(false);
+            }
         }
         //------------------------------------------------------------------------------
     }
@@ -513,5 +528,15 @@ public class PlayerScript : MonoBehaviour
             inJailTrigger = false;
         }
         //-------------------------------------------------------------------
+    }
+
+    public bool CheckIfLevel(string SceneName)
+    {
+        if (SceneName == "SchoolHouse")
+        {
+            return true;
+        }
+
+        return false;
     }
 }

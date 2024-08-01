@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 6968358490513496870}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -224,8 +224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d9735bb3a645be43b2b63e61660e9e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameController: {fileID: 0}
   rb: {fileID: 5927821490713564855}
   camera: {fileID: 5927821490399300761}
+  multiplier: 0
   sprint: 100
   guiltval: 0
   lockedinguilt: 0
@@ -248,11 +250,20 @@ MonoBehaviour:
     type: 3}
   ZestySprite: {fileID: 0}
   BSODASprite: {fileID: 0}
+  KeySprite: {fileID: 0}
   ItemText: {fileID: 0}
   cameraflipped: 0
   BSODAProjectile: {fileID: 0}
   SodaSpray: {fileID: 8300000, guid: df974dfa42585b54280e867f698a5860, type: 3}
   AudioSource: {fileID: 6968358490513496870}
+  insideofFaculty: 0
+  Principal: {fileID: 0}
+  JailTime: 0
+  PrincipalDoor: {fileID: 0}
+  DetentionText: {fileID: 0}
+  inJailTrigger: 0
+  caught: 0
+  Baldi: {fileID: 0}
 --- !u!82 &6968358490513496870
 AudioSource:
   m_ObjectHideFlags: 0

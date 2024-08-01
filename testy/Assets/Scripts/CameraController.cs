@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -23,6 +25,15 @@ public class CameraController : MonoBehaviour
             yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
             playerBody.Rotate(Vector3.up * mouseX * 5f);
+        }
+
+        if (PlayerPrefs.HasKey("cameraSensitivity"))
+        {
+            mouseSensitivity = PlayerPrefs.GetFloat("cameraSensitivity") * 100f;
+        }
+        else
+        {
+            mouseSensitivity = 100f;
         }
     }
 }

@@ -13,7 +13,9 @@ public class BaldiScript : MonoBehaviour
     public bool seesPlayer = false;
     public AudioSource AudioSource;
     public AudioClip SlapSound;
+    public AudioClip ScreechSound;
     public GameObject GameController;
+    public GameObject HUD;
 
     // Start is called before the first frame update
     void Start()
@@ -122,6 +124,12 @@ public class BaldiScript : MonoBehaviour
             Vector3 targetPosition = new Vector3(this.gameObject.transform.position.x, Player.transform.transform.position.y, this.gameObject.transform.position.z);
             Player.transform.LookAt(targetPosition);
 
+            //Turn off the UI
+            HUD.SetActive(false);
+
+            //Scare em
+            AudioSource.PlayOneShot(ScreechSound);
+
             // Stop the player and Baldi from being able to move
             Destroy(Player.GetComponent<Rigidbody>());
             Destroy(Baldi.GetComponent<Rigidbody>());
@@ -159,6 +167,6 @@ public class BaldiScript : MonoBehaviour
 
     void onGameDone()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("StartingPlace");
     }
 }
