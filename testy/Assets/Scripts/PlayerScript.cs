@@ -506,6 +506,43 @@ public class PlayerScript : MonoBehaviour
         //-------------------------------------------------------------------
     }
 
+    void OnCollisionEnter(Collision other)
+    {
+        // Rest of Bully Logic ----------------------------------------------
+        if (other.gameObject.tag == "BullyCollider")
+        {
+            if (inventory[0] < 1 && inventory[1] < 1 && inventory[2] < 1)
+            {
+                Debug.Log("What, no items? No items, no paaassssss");
+            }
+            else
+            {
+                int SlotToSteal = Random.Range(0, 3);
+
+                if (inventory[SlotToSteal] < 1)
+                {
+                    SlotToSteal += 1;
+                    
+                    if (SlotToSteal > 2) { SlotToSteal = 0; }
+
+                    if (inventory[SlotToSteal] < 1)
+                    {
+                        SlotToSteal += 1;
+
+                        if (SlotToSteal > 2) { SlotToSteal = 0; }
+                    }
+                }
+
+                inventory[SlotToSteal] = 0;
+                Debug.Log( "Thank you for your generous donationnnnn");
+
+                //Temporary dissapearance, will replace with a proper method later
+                Destroy(other.gameObject.transform.parent.gameObject);
+            }
+        }
+        //-------------------------------------------------------------------
+    }
+
     private void OnTriggerExit(Collider other)
     {
         // Swinging Doors ---------------------------------------------------
