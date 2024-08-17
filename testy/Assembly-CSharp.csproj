@@ -55,11 +55,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BSODASprayScript.cs" />
+     <Compile Include="Assets\Scripts\BaldiScript.cs" />
      <Compile Include="Assets\Scripts\BillboardScript.cs" />
+     <Compile Include="Assets\Scripts\BullyScript.cs" />
+     <Compile Include="Assets\Scripts\CSensitivityChangeScript.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+     <Compile Include="Assets\Scripts\FinishScreenScript.cs" />
+     <Compile Include="Assets\Scripts\GameControllerScript.cs" />
+     <Compile Include="Assets\Scripts\ItemScript.cs" />
      <Compile Include="Assets\Scripts\PlacefaceScript.cs" />
      <Compile Include="Assets\Scripts\PlayerScript.cs" />
+     <Compile Include="Assets\Scripts\PrincipalScript.cs" />
+     <Compile Include="Assets\Scripts\SettingsTrigger.cs" />
      <Compile Include="Assets\Scripts\StaminaBarScript.cs" />
+     <Compile Include="Assets\Scripts\VolumeChangeScript.cs" />
      <Compile Include="Assets\Scripts\bluedoorscript.cs" />
      <Compile Include="Assets\Scripts\swingdoorscript.cs" />
  <Reference Include="UnityEngine">
@@ -591,37 +601,37 @@
  <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.29f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VSCode.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Rider.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
- <HintPath>C:/Users/alexn/Desktop/Unity Projects/testy/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+ <HintPath>D:/Github Repositories/connie-baldis-basics-remake/testy/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
