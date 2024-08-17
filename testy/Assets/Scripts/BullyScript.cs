@@ -9,18 +9,31 @@ public class BullyScript : MonoBehaviour
     public GameObject Player;
     public GameObject AIWanderPoints;
     private GameObject ChosenPoint;
+    public Vector3 InitialSpawnPos;
+    public bool SaidLine;
+    public AudioSource AudioSource;
+    public AudioClip SomethinGreat;
+    public AudioClip GenerousDonation;
+    public AudioClip NoItems;
 
     void Start()
     {
-        // TODO: Make this timed
-        //SpawnBully();
+        BullyTimer();
+    }
+
+    public void BullyTimer()
+    {
+        float timing = Random.Range(20f, 50f);
+        SaidLine = false;
+        Invoke("SpawnBully", timing);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && SaidLine == false)
         {
-            Debug.Log("Give me something greeeeeeeeeat");
+            AudioSource.PlayOneShot(SomethinGreat);
+            SaidLine = true;
         }
     }
 
@@ -56,5 +69,11 @@ public class BullyScript : MonoBehaviour
         //------------------------------------------
 
         this.gameObject.transform.position = SpawnPos;
+    }
+
+    public void OnBullyGone()
+    {
+        this.gameObject.transform.position = InitialSpawnPos;
+        BullyTimer();
     }
 }

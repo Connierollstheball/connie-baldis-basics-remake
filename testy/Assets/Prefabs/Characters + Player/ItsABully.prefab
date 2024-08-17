@@ -159,6 +159,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   AIWanderPoints: {fileID: 0}
+  InitialSpawnPos: {x: 40, y: -14.5, z: 20}
+  SaidLine: 0
+  AudioSource: {fileID: 4067529049894776955}
+  SomethinGreat: {fileID: 8300000, guid: b03eca81f9dfe02409d4a0d3b7c74389, type: 3}
+  GenerousDonation: {fileID: 8300000, guid: f5c60881f0987964884862642fa0eddb, type: 3}
+  NoItems: {fileID: 8300000, guid: b2401fe5ec0e16549bc5c02bf98287a4, type: 3}
 --- !u!212 &3116886118528958181
 SpriteRenderer:
   m_ObjectHideFlags: 0

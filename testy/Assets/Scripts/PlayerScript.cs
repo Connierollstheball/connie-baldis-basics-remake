@@ -513,7 +513,7 @@ public class PlayerScript : MonoBehaviour
         {
             if (inventory[0] < 1 && inventory[1] < 1 && inventory[2] < 1)
             {
-                Debug.Log("What, no items? No items, no paaassssss");
+                other.gameObject.transform.parent.gameObject.GetComponent<AudioSource>().PlayOneShot(other.gameObject.transform.parent.gameObject.GetComponent<BullyScript>().NoItems);
             }
             else
             {
@@ -534,10 +534,10 @@ public class PlayerScript : MonoBehaviour
                 }
 
                 inventory[SlotToSteal] = 0;
-                Debug.Log( "Thank you for your generous donationnnnn");
+                other.gameObject.transform.parent.gameObject.GetComponent<AudioSource>().PlayOneShot(other.gameObject.transform.parent.gameObject.GetComponent<BullyScript>().GenerousDonation);
 
-                //Temporary dissapearance, will replace with a proper method later
-                Destroy(other.gameObject.transform.parent.gameObject);
+                // Makes him dissapear
+                other.gameObject.transform.parent.gameObject.GetComponent<BullyScript>().OnBullyGone();
             }
         }
         //-------------------------------------------------------------------

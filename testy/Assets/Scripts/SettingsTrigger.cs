@@ -6,6 +6,13 @@ public class SettingsTrigger : MonoBehaviour
 {
     public GameObject Canvas;
 
+    // When a Player gets here --------------------------
+    void Start()
+    {
+        AudioListener.volume = PlayerPrefs.GetFloat("musicVolume");
+    }
+    //---------------------------------------------------
+
     // Settings Trigger Protocol ------------------------
     private void OnTriggerEnter(Collider other)
     {
