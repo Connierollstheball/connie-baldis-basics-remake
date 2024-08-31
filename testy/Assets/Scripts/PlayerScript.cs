@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviour
     public Sprite ZestySprite;
     public Sprite BSODASprite;
     public Sprite KeySprite;
+    public Sprite TapeSprite;
     public Text ItemText;
     public bool cameraflipped = false;
     public GameObject BSODAProjectile;
@@ -45,6 +46,7 @@ public class PlayerScript : MonoBehaviour
     public bool inJailTrigger = false;
     public bool caught = false;
     public GameObject Baldi;
+    public GameObject TapePlayer;
 
     void Start()
     {
@@ -183,7 +185,11 @@ public class PlayerScript : MonoBehaviour
                 if (hit.collider.tag == "BlueDoor" && hit.distance < 8.0f)
                 {
                     hit.collider.gameObject.transform.parent.gameObject.GetComponent<bluedoorscript>().open();
-                    Baldi.GetComponent<BaldiScript>().BaldiSetDestination(hit.collider.gameObject);
+
+                    if (TapePlayer.GetComponent<TapePlayerScript>().playingtape == false) 
+                    {
+                        Baldi.GetComponent<BaldiScript>().BaldiSetDestination(hit.collider.gameObject);
+                    }
                 }
 
                 //Detect Item Collection
@@ -252,6 +258,16 @@ public class PlayerScript : MonoBehaviour
                 //-------------------------------------------------------------------------------------
                 removeItem(selecteditem);
             }
+
+            // Tape Player
+            if (checkifItem(5))
+            {
+                if (hit.collider.tag == "TapePlayerTag" && hit.distance < 8.0f && hit.collider.gameObject.GetComponent<TapePlayerScript>().playingtape == false)
+                {
+                    hit.collider.gameObject.GetComponent<TapePlayerScript>().PlayTape();
+                    removeItem(selecteditem);
+                }
+            }
         }
 
         // Inventory Selection ----------------------------------------------------
@@ -318,7 +334,11 @@ public class PlayerScript : MonoBehaviour
                     case 4:
                     inventoryslots[i].SetActive(true);
                     inventoryslots[i].GetComponent<Image>().sprite = KeySprite;
-                    break;           
+                    break;   
+                    case 5:
+                    inventoryslots[i].SetActive(true);
+                    inventoryslots[i].GetComponent<Image>().sprite = TapeSprite;
+                    break;                            
                 }
             }
 
@@ -395,6 +415,10 @@ public class PlayerScript : MonoBehaviour
         {
             ItemText.GetComponent<Text>().text = "Principals Keys";
         }
+        else if (checkifItem(5))
+        {
+            ItemText.GetComponent<Text>().text = "Baldi's Least Favorite Tape";
+        }
     }
     //------------------------------------------------------------------------------
 
@@ -452,6 +476,10 @@ public class PlayerScript : MonoBehaviour
                 case 4:
                 Instantiate(GameController.GetComponent<GameControllerScript>().Key, item.transform.position, item.transform.rotation);
                 break;
+
+                case 5:
+                Instantiate(GameController.GetComponent<GameControllerScript>().Tape, item.transform.position, item.transform.rotation);
+                break;
             }
 
             inventory[selecteditem] = item.GetComponent<ItemScript>().idofpickup;
@@ -468,7 +496,11 @@ public class PlayerScript : MonoBehaviour
         {
             other.GetComponent<swingdoorscript>().open();
             other.GetComponent<swingdoorscript>().somethinginside = true;
-            Baldi.GetComponent<BaldiScript>().BaldiSetDestination(other.gameObject);
+
+            if (TapePlayer.GetComponent<TapePlayerScript>().playingtape == false) 
+            {
+                Baldi.GetComponent<BaldiScript>().BaldiSetDestination(other.gameObject);
+            }
         }
         //-------------------------------------------------------------------
 
@@ -491,7 +523,6 @@ public class PlayerScript : MonoBehaviour
         {
             other.GetComponent<swingdoorscript>().open();
             other.GetComponent<swingdoorscript>().somethinginside = true;
-            Baldi.GetComponent<BaldiScript>().BaldiSetDestination(other.gameObject);
             SceneManager.LoadScene("FinishScreen");
         }
         //-------------------------------------------------------------------

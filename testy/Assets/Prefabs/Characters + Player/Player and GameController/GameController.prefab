@@ -53,6 +53,7 @@ MonoBehaviour:
   YellowLock: {fileID: 8424372221990059559, guid: 0e7ef49ab5896354a9b6390e9cfd3cdb,
     type: 3}
   Key: {fileID: 3294809606260963642, guid: ce070488fa52c2c4f87aca661f183ecb, type: 3}
+  Tape: {fileID: 7346599227454109846, guid: 8b1b3a194836ca24a9dae94b81374e23, type: 3}
   AIWanderPoints: {fileID: 0}
   NotebookCount: 0
   NotebookTotal: 1
