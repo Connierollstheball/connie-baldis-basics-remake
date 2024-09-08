@@ -5,16 +5,26 @@ using UnityEngine.UI;
 
 public class GameControllerScript : MonoBehaviour
 {
-    // TODO: move a bunch of shit here
+    // Items --------------
     public GameObject BSODA;
     public GameObject Zesty;
     public GameObject YellowLock;
     public GameObject Key;
     public GameObject Tape;
+    // ---------------------
+
+    // Characters + Player -----
+    public GameObject Principal;
+    public GameObject Baldi;
+    public GameObject Player;
+    // -------------------------
+
+    // Others ------------------
     public GameObject AIWanderPoints;
     public int NotebookCount;
     public int NotebookTotal = 1;
     public Text NotebookCountText;
+    // -------------------------
 
     void Update()
     {

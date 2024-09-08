@@ -6,8 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class BaldiScript : MonoBehaviour
 {
-    public GameObject Baldi;
-    public GameObject Player;
+    GameObject Player;
     public NavMeshAgent Agent;
     public LayerMask layerstohit;
     public bool seesPlayer = false;
@@ -25,6 +24,10 @@ public class BaldiScript : MonoBehaviour
         SlapLoop();
         GameObject WanderPoint = GameController.GetComponent<GameControllerScript>().chooseWanderPoint();
         Agent.destination = WanderPoint.transform.position;
+
+        // Game Objects as defined in Game Controller --------------------------------
+        Player = GameController.GetComponent<GameControllerScript>().Player;
+        // ---------------------------------------------------------------------------
     }
 
     // Update is called once per frame
@@ -35,8 +38,8 @@ public class BaldiScript : MonoBehaviour
 
         // Character's Vision (chracter will look for the player) -----------
         RaycastHit hit;
-        Vector3 direction = (Player.transform.position - Baldi.transform.position).normalized;
-        Ray ray = new Ray(Baldi.transform.position, direction);
+        Vector3 direction = (Player.transform.position - this.gameObject.transform.position).normalized;
+        Ray ray = new Ray(this.gameObject.transform.position, direction);
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerstohit))
         {
@@ -132,7 +135,7 @@ public class BaldiScript : MonoBehaviour
 
             // Stop the player and Baldi from being able to move
             Destroy(Player.GetComponent<Rigidbody>());
-            Destroy(Baldi.GetComponent<Rigidbody>());
+            Destroy(this.gameObject.GetComponent<Rigidbody>());
             CancelInvoke("SlapLoop");
             Agent.enabled = false;
 

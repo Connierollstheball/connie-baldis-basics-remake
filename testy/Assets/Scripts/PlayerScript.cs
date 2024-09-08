@@ -39,13 +39,13 @@ public class PlayerScript : MonoBehaviour
     public AudioClip SodaSpray;
     public AudioSource AudioSource;
     public bool insideofFaculty;
-    public GameObject Principal;
     public float JailTime;
     public GameObject PrincipalDoor;
+    GameObject Principal;
     public GameObject DetentionText;
     public bool inJailTrigger = false;
     public bool caught = false;
-    public GameObject Baldi;
+    GameObject Baldi;
     public GameObject TapePlayer;
 
     void Start()
@@ -62,6 +62,11 @@ public class PlayerScript : MonoBehaviour
         inventoryslotsbackg[0] = item1slotbackg;
         inventoryslotsbackg[1] = item2slotbackg;
         inventoryslotsbackg[2] = item3slotbackg;
+        //----------------------------------------------------------------------------
+
+        // Game Objects as defined in Game Controller --------------------------------
+        Principal = GameController.GetComponent<GameControllerScript>().Principal;
+        Baldi = GameController.GetComponent<GameControllerScript>().Baldi;
         //----------------------------------------------------------------------------
     }
 

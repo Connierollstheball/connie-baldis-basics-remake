@@ -24341,6 +24341,11 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 262993756}
+    - target: {fileID: 3074093035758800472, guid: 54b4ac12a11692c4685ac7ebfe5c6b39,
+        type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 136582610}
     - target: {fileID: 3074093036194794448, guid: 54b4ac12a11692c4685ac7ebfe5c6b39,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -24798,6 +24803,11 @@ PrefabInstance:
       propertyPath: AIWanderPoints
       value: 
       objectReference: {fileID: 481396990}
+    - target: {fileID: 6011611734315650417, guid: 076f52e5ddc45a6409690addf778e684,
+        type: 3}
+      propertyPath: GameController
+      value: 
+      objectReference: {fileID: 136582610}
     - target: {fileID: 7137806514073161130, guid: 076f52e5ddc45a6409690addf778e684,
         type: 3}
       propertyPath: m_Size.x
@@ -25246,6 +25256,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6134665177677905150, guid: 911ce2741902924429e69c8e332d54ab,
+        type: 3}
+      propertyPath: Baldi
+      value: 
+      objectReference: {fileID: 660395564}
+    - target: {fileID: 6134665177677905150, guid: 911ce2741902924429e69c8e332d54ab,
+        type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 262993756}
+    - target: {fileID: 6134665177677905150, guid: 911ce2741902924429e69c8e332d54ab,
+        type: 3}
+      propertyPath: Principal
+      value: 
+      objectReference: {fileID: 75728824}
     - target: {fileID: 6134665177677905150, guid: 911ce2741902924429e69c8e332d54ab,
         type: 3}
       propertyPath: AIWanderPoints

@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlacefaceScript : MonoBehaviour
 {
     public NavMeshAgent Agent;
-    public GameObject Player;
+    GameObject Player;
+    public GameObject GameController;
     public GameObject Enemy;
     public bool seesPlayer;
     public LayerMask layerstohit;
@@ -18,6 +19,13 @@ public class PlacefaceScript : MonoBehaviour
     public GameObject TPPlayer;
     public GameObject TPSelf;
     public bool ignoringPlayer = false;
+
+    void Start()
+    {
+        // Game Objects as defined in Game Controller --------------------------------
+        Player = GameController.GetComponent<GameControllerScript>().Player;
+        // ---------------------------------------------------------------------------
+    }
 
     // Update is called once per frame
     void Update()

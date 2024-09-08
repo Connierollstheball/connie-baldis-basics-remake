@@ -5,8 +5,16 @@ using UnityEngine.UI;
 
 public class StaminaBarScript : MonoBehaviour
 {
-    public GameObject Player;
+    GameObject Player;
+    public GameObject GameController;
     public Slider staminabar;
+
+    void Start()
+    {
+        // Game Objects as defined in Game Controller --------------------------------
+        Player = GameController.GetComponent<GameControllerScript>().Player;
+        // ---------------------------------------------------------------------------
+    }
 
     void Update()
     {

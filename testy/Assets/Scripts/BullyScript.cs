@@ -6,7 +6,7 @@ public class BullyScript : MonoBehaviour
 {
     // TODO: Sounds
     // Rest of it is in PlayerScript.
-    public GameObject Player;
+    GameObject Player;
     public GameObject AIWanderPoints;
     private GameObject ChosenPoint;
     public Vector3 InitialSpawnPos;
@@ -15,10 +15,15 @@ public class BullyScript : MonoBehaviour
     public AudioClip SomethinGreat;
     public AudioClip GenerousDonation;
     public AudioClip NoItems;
+    public GameObject GameController;
 
     void Start()
     {
         BullyTimer();
+
+        // Game Objects as defined in Game Controller --------------------------------
+        Player = GameController.GetComponent<GameControllerScript>().Player;
+        // ---------------------------------------------------------------------------
     }
 
     public void BullyTimer()

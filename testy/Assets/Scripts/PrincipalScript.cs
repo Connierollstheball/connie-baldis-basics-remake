@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class PrincipalScript : MonoBehaviour
 {
     public NavMeshAgent Agent;
-    public GameObject Player;
+    GameObject Player;
     public AudioClip noFaculty;
     public AudioClip noRunning;
     public AudioClip noDrink;
@@ -19,12 +19,18 @@ public class PrincipalScript : MonoBehaviour
     public GameObject TPSelf;
     public GameObject GameController;
     public GameObject PrincipalDoor;
-    public GameObject Baldi;
+    GameObject Baldi;
 
     void Start()
     {
         GameObject AIPoint = GameController.GetComponent<GameControllerScript>().chooseWanderPoint();
         Agent.destination = AIPoint.transform.position;
+
+        // Game Objects as defined in Game Controller --------------------------------
+        Baldi = GameController.GetComponent<GameControllerScript>().Baldi;
+        Player = GameController.GetComponent<GameControllerScript>().Player;
+        //----------------------------------------------------------------------------
+
     }
 
     // Update is called once per frame
